@@ -50,7 +50,7 @@ func resourceProjectCreate(d *schema.ResourceData, meta interface{}) error {
 
 	p, _, err := client.Projects.Create(&params)
 	if err != nil {
-		return fmt.Errorf("Error creating MongoDB Project IP Projects: %s", err)
+		return fmt.Errorf("Error creating MongoDB Project: %s", err)
 	}
 	d.SetId(p.ID)
 	log.Printf("[INFO] MongoDB Project ID: %s", d.Id())

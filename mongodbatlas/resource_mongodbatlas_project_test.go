@@ -18,9 +18,9 @@ func TestAccMongodbatlasProject_basic(t *testing.T) {
 			{
 				Config: testAccMongodbatlasProject(projectName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttrSet(resourceName, "org_id"),
+					resource.TestCheckResourceAttr(resourceName, "org_id", testGetOrgID()),
 					resource.TestCheckResourceAttrSet(resourceName, "created"),
-					resource.TestCheckResourceAttrSet(resourceName, "cluster_count"),
+					resource.TestCheckResourceAttr(resourceName, "cluster_count", "0"),
 					resource.TestCheckResourceAttr(resourceName, "name", projectName),
 				),
 			},
@@ -30,7 +30,7 @@ func TestAccMongodbatlasProject_basic(t *testing.T) {
 
 func testAccMongodbatlasProject(projectName string) string {
 	return fmt.Sprintf(`resource "mongodbatlas_project" "test" {
-  org_id = "5b71ff2f96e82120d0aaec14"
+  org_id = "%s"
   name = "%s"
-}`, projectName)
+}`, testGetOrgID(), projectName)
 }
